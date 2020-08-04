@@ -16,17 +16,16 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 //​​​​​​​​​http://localhost:8080/Servido_JaraRicardo/ServicesSOAP?wsdl
 //Actualzate
+
 @WebService
 public class ServicesSOAP {
 
     public ServicesSOAP() {
     }
-    
-    
 
     @Inject
     private ProductoON productoON;
-    
+
     @Inject
     private CarroON carroON;
 
@@ -34,58 +33,24 @@ public class ServicesSOAP {
     public List<Producto> listaProductos() {
         return productoON.listarProductos();
     }
-    
+
     @WebMethod
     public String llenarCarrito(List<Carro> list) {
-        for (Carro c : list) {
-            Carro cc = new Carro();
-            System.out.println("|"+c.getCodigocompra()+"|");
-            cc.setCodigocompra(c.getCodigocompra());
-            cc.setPrecio(c.getPrecio());
-            cc.setProducto(c.getProducto());
-            carroON.guardarCarro(cc);
-            c.getProducto().setStock(c.getProducto().getStock() - 1);
-            productoON.actProducto(c.getProducto());
-        }
-        return "Compra almacenada";
+        return carroON.guardarLista(list);
     }
-    
+
     @WebMethod
     public String addCarrito(Carro c) {
-            Carro cc = new Carro();
-            System.out.println("|"+c.getCodigocompra()+"|");
-            cc.setCodigocompra(c.getCodigocompra());
-            cc.setPrecio(c.getPrecio());
-            cc.setProducto(c.getProducto());
-            carroON.guardarCarro(cc);
-            c.getProducto().setStock(c.getProducto().getStock() - 1);
-            productoON.actProducto(c.getProducto());
-        return "carrito agregado";
+        return carroON.guardarCarro(c);
     }
-    
-    
+
     @WebMethod
     public List<Carro> miCarrito(String codigo) {
-        codigo = codigo.replace(" ", "");
         return carroON.listarCarroCodigo(codigo);
     }
-    
-    
-    
-    
+
     @WebMethod
     public String crearProducto(Producto p) {
-        try {
-            Producto pro = new Producto();
-            pro.setNombre(p.getNombre());
-            pro.setCodigo(p.getCodigo());
-            pro.setStock(p.getStock());
-            pro.setPrecio(p.getPrecio());
-            productoON.guardarProducto(pro);
-            return "Producto ingresado";
-        } catch (Exception ex) {
-            return "Error ingresar producto";
-        }
-        
+        return productoON.guardarProducto(p);
     }
 }

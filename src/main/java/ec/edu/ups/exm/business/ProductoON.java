@@ -34,11 +34,18 @@ public class ProductoON {
     public ProductoON() {
     }
 
-    public boolean guardarProducto(Producto producto) throws Exception {
+    public String guardarProducto(Producto p) {
         try {
-            return productoDAO.insert(producto);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            Producto pro = new Producto();
+            pro.setNombre(p.getNombre());
+            pro.setCodigo(p.getCodigo());
+            pro.setStock(p.getStock());
+            pro.setPrecio(p.getPrecio());
+            productoDAO.insert(p);
+            return "Producto Creado";
+        } catch (Exception ex) {
+            Logger.getLogger(ProductoON.class.getName()).log(Level.SEVERE, null, ex);
+            return "Error Producto Creado";
         }
     }
     
@@ -53,6 +60,7 @@ public class ProductoON {
     
     public void actProducto(Producto p){
         try {
+            p.setStock(p.getStock() - 1);
             productoDAO.update(p);
         } catch (Exception ex) {
             Logger.getLogger(ProductoON.class.getName()).log(Level.SEVERE, null, ex);

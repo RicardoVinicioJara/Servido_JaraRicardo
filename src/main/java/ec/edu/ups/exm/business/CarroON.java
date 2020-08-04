@@ -32,16 +32,27 @@ public class CarroON {
      */
     @Inject
     CarroDAO carroDAO;
+    
+    @Inject
+    ProductoON productoON;
+
 
     public CarroON() {
     }
 
-    public boolean guardarCarro(Carro carro){
+    public String guardarCarro(Carro c){
         try {
-            return carroDAO.insert(carro);
+            Carro cc = new Carro();
+            System.out.println("|"+c.getCodigocompra()+"|");
+            cc.setCodigocompra(c.getCodigocompra());
+            cc.setPrecio(c.getPrecio());
+            cc.setProducto(c.getProducto());
+            productoON.actProducto(c.getProducto());
+            carroDAO.insert(cc);
+            return "Carrito agregado";
         } catch (Exception ex) {
             Logger.getLogger(CarroON.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return "Erro agregar carrito";
         }
     }
     
@@ -61,6 +72,25 @@ public class CarroON {
             Logger.getLogger(CarroON.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public String guardarLista(List<Carro> list){
+        try {
+            for (Carro c : list) {
+            Carro cc = new Carro();
+            System.out.println("|"+c.getCodigocompra()+"|");
+            cc.setCodigocompra(c.getCodigocompra());
+            cc.setPrecio(c.getPrecio());
+            cc.setProducto(c.getProducto());
+            guardarCarro(cc);
+            productoON.actProducto(c.getProducto());
+            return "Compra almacenada";
+        }
+        } catch (Exception ex) {
+            Logger.getLogger(CarroON.class.getName()).log(Level.SEVERE, null, ex);
+            return "Erro";
+        }
+        return "Listo";
     }
 
 }
