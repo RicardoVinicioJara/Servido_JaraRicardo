@@ -1,0 +1,6 @@
+ec\edu\ups\exm\vista\Vista.class
+ec\edu\ups\exm\business\ProductoON.class
+ec\edu\ups\exm\dao\ProductoDAO.class
+ec\edu\ups\exm\emtitis\Producto.class
+ec\edu\ups\exm\services\ServicesSOAP.class
+ec\edu\ups\exm\controler\ProductoBEAN.class

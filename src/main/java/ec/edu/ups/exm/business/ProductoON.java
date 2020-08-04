@@ -41,5 +41,14 @@ public class ProductoON {
             throw new Exception(e.getMessage());
         }
     }
+    
+    public List<Producto> listarProductos() {
+        try {
+            return productoDAO.findAll();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductoON.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }

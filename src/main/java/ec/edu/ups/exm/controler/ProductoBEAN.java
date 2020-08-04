@@ -56,6 +56,7 @@ public class ProductoBEAN {
     public String guardarProducto(){
         try {
             productoON.guardarProducto(producto);
+            init();
             System.out.println("Guardando");
         } catch (Exception ex) {
             Logger.getLogger(ProductoBEAN.class.getName()).log(Level.SEVERE, null, ex);
