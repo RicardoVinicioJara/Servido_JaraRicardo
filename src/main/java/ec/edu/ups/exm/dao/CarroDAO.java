@@ -92,6 +92,7 @@ public class CarroDAO {
         try {
             Query q = em.createNamedQuery("Carro.findByCodigocompra");
             q.setParameter("codigocompra", codigo);
+            System.out.println("acaa estamos buscando");
             List<Carro> lista = q.getResultList();
             return lista;
         } catch (Exception e) {

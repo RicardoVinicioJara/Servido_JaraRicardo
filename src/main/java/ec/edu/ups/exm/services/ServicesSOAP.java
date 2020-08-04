@@ -39,18 +39,39 @@ public class ServicesSOAP {
     public String llenarCarrito(List<Carro> list) {
         for (Carro c : list) {
             Carro cc = new Carro();
+            System.out.println("|"+c.getCodigocompra()+"|");
             cc.setCodigocompra(c.getCodigocompra());
             cc.setPrecio(c.getPrecio());
             cc.setProducto(c.getProducto());
             carroON.guardarCarro(cc);
+            c.getProducto().setStock(c.getProducto().getStock() - 1);
+            productoON.actProducto(c.getProducto());
         }
         return "Compra almacenada";
     }
     
     @WebMethod
+    public String addCarrito(Carro c) {
+            Carro cc = new Carro();
+            System.out.println("|"+c.getCodigocompra()+"|");
+            cc.setCodigocompra(c.getCodigocompra());
+            cc.setPrecio(c.getPrecio());
+            cc.setProducto(c.getProducto());
+            carroON.guardarCarro(cc);
+            c.getProducto().setStock(c.getProducto().getStock() - 1);
+            productoON.actProducto(c.getProducto());
+        return "carrito agregado";
+    }
+    
+    
+    @WebMethod
     public List<Carro> miCarrito(String codigo) {
+        codigo = codigo.replace(" ", "");
         return carroON.listarCarroCodigo(codigo);
     }
+    
+    
+    
     
     @WebMethod
     public String crearProducto(Producto p) {

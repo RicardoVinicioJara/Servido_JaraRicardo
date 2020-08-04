@@ -50,5 +50,13 @@ public class ProductoON {
         }
         return null;
     }
+    
+    public void actProducto(Producto p){
+        try {
+            productoDAO.update(p);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductoON.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
