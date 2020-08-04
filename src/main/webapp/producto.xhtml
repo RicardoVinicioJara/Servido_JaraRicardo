@@ -28,6 +28,12 @@
                 </div>
                 <h:inputText a:type="text" value="#{productoBEAN.producto.stock}" class="form-control" />
             </div>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user">Precio</i></span>
+                </div>
+                <h:inputText a:type="text" value="#{productoBEAN.producto.precio}" class="form-control" />
+            </div>
 
             <h:commandButton class=" btn btn-success btn-block" value="GUARDAR" action="#{productoBEAN.guardarProducto()}">
                 <f:ajax render="@all" execute="crearProducto"/>

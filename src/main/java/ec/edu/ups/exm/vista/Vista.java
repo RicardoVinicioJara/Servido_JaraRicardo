@@ -38,7 +38,7 @@ public class Vista extends HttpServlet {
             Producto p = new Producto();
             p.setNombre("Papas");
             p.setCodigo("p001");
-            p.setStock(100+"");
+            p.setStock(100);
             
             response.getWriter().println("<h1> HOLA " +productoON.guardarProducto(p));
         } catch (Exception ex) {
